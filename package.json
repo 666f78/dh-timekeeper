@@ -1,0 +1,35 @@
+{
+  "name": "dh-timekeeper",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "watch": "node esbuild.config.mjs --watch",
+    "clean": "rimraf dist",
+    "copy": "cpy module.json styles/** dist/",
+    "dev": "npm-run-all clean build copy --parallel watch watch:copy",
+    "watch:copy": "chokidar \"module.json\" \"styles/**\" -c \"npm run copy\""
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "bestzip": "^2.2.1",
+    "chokidar-cli": "^3.0.0",
+    "cpy-cli": "^5.0.0",
+    "esbuild": "^0.23.0",
+    "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.6.0"
+  },
+  "description": "D.H. / 666f78: Timekeeper module for Foundry VTT v13",
+  "license": "MIT",
+  "author": "D.H. / 666f78",
+  "keywords": [
+    "foundryvtt",
+    "module",
+    "timekeeper",
+    "clock",
+    "utc"
+  ]
+}

@@ -16,6 +16,7 @@
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
+    timeZone: 'UTC',
   };
 
   const CLASS = {
@@ -123,12 +124,12 @@
   function toParts(ms: number): TimeParts {
     const d = new Date(ms);
     return {
-      year: d.getFullYear(),
-      month: d.getMonth() + 1,
-      day: d.getDate(),
-      hour: d.getHours(),
-      minute: d.getMinutes(),
-      second: d.getSeconds(),
+      year: d.getUTCFullYear(),
+      month: d.getUTCMonth() + 1,
+      day: d.getUTCDate(),
+      hour: d.getUTCHours(),
+      minute: d.getUTCMinutes(),
+      second: d.getUTCSeconds(),
     };
   }
 
@@ -359,7 +360,9 @@
           return;
         }
 
-        const targetDate = new Date(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+        const targetDate = new Date(
+          Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second),
+        );
         await requireTime().set(targetDate.getTime() / MS_PER_SECOND);
         withPlayersElement(renderBlock);
         panel.remove();
@@ -389,13 +392,13 @@
 
   async function addMonths(delta: number): Promise<void> {
     const date = new Date(currentEpochMs());
-    date.setMonth(date.getMonth() + delta);
+    date.setUTCMonth(date.getUTCMonth() + delta);
     await requireTime().set(date.getTime() / MS_PER_SECOND);
   }
 
   async function addYears(delta: number): Promise<void> {
     const date = new Date(currentEpochMs());
-    date.setFullYear(date.getFullYear() + delta);
+    date.setUTCFullYear(date.getUTCFullYear() + delta);
     await requireTime().set(date.getTime() / MS_PER_SECOND);
   }
 

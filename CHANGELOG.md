@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.1]
+
+### Fixed
+- Time now displays correctly across different time zones
+
 ## [1.0.0]
 
 ### Added
